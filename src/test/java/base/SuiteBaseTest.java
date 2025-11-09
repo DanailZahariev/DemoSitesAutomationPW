@@ -17,14 +17,13 @@ public class SuiteBaseTest {
     protected static boolean finalHeadless;
 
     @BeforeSuite(alwaysRun = true)
-    @Parameters({"headless"})
-    public void setUpSuite(@Optional String headless) {
+    public void setUpSuite() {
         LOGGER.info("╔════════════════════════════════════════╗");
         LOGGER.info("║      Test Suite Started                ║");
         LOGGER.info("╚════════════════════════════════════════╝");
 
         finalBrowser = System.getProperty("browser", ConfigReader.getBrowser());
-        String headlessProp = System.getProperty("headless", headless != null ? headless : String.valueOf(ConfigReader.isHeadless()));
+        String headlessProp = System.getProperty("headless", String.valueOf(ConfigReader.isHeadless()));
         finalHeadless = Boolean.parseBoolean(headlessProp);
 
         LOGGER.info("Tests will run on: {}", finalBrowser);

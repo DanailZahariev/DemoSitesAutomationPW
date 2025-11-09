@@ -24,7 +24,7 @@ public class PlaywrightManager {
 
         BrowserContext context;
 
-        try (Browser browser = switch (browserType) {
+        Browser browser = switch (browserType) {
             case "chromium", "chrome" -> playwright.chromium().launch(launchOptions);
             case "firefox" -> playwright.firefox().launch(launchOptions);
             case "webkit" -> playwright.webkit().launch(launchOptions);
@@ -32,14 +32,15 @@ public class PlaywrightManager {
                 LOGGER.warn("Unknown browser: {}. Using Chromium.", browserType);
                 yield playwright.chromium().launch(launchOptions);
             }
-        }) {
-            browserThreadLocal.set(browser);
-            LOGGER.info("Thread [{}]: Started {} browser (headless: {})", Thread.currentThread().getId(), browserType, headless);
+        };
 
-            Browser.NewContextOptions contextOptions = new Browser.NewContextOptions()
-                    .setViewportSize(ConfigReader.getViewportWidth(), ConfigReader.getViewportHeight());
-            context = browser.newContext(contextOptions);
-        }
+        browserThreadLocal.set(browser);
+        LOGGER.info("Thread [{}]: Started {} browser (headless: {})", Thread.currentThread().getId(), browserType, headless);
+
+        Browser.NewContextOptions contextOptions = new Browser.NewContextOptions()
+                .setViewportSize(ConfigReader.getViewportWidth(), ConfigReader.getViewportHeight());
+        context = browser.newContext(contextOptions);
+
         contextThreadLocal.set(context);
 
         Page page = context.newPage();
