@@ -53,7 +53,7 @@ public class SuiteBaseTest {
             LOGGER.warn("Test SKIPPED: {}", testName);
         }
 
-        PlaywrightManager.teardown();
+        PlaywrightManager.teardownSuite();
         LOGGER.info("──────────────────────────────────────────");
     }
 }

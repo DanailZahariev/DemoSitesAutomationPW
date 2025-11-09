@@ -19,7 +19,7 @@ public class BaseTest extends SuiteBaseTest {
         LOGGER.info("──────────────────────────────────────────");
         LOGGER.info("Starting test");
 
-        PlaywrightManager.startBrowser(finalBrowser, finalHeadless, url);
+        PlaywrightManager.setUpSuite(finalBrowser, finalHeadless, url);
         Page page = PlaywrightManager.getPage();
         page.waitForLoadState();
 
