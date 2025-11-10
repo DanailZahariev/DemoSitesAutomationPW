@@ -19,6 +19,11 @@ public class ElementsPage extends BasePage {
         this.textBoxMenuItem = page.locator("//li[@id='item-0']//span[text()='Text Box']");
     }
 
+    public TextBoxPage clickTextBox() {
+        click(textBoxMenuItem);
+        return new TextBoxPage(this.page);
+    }
+
     public LinksPage clickLinks() {
         click(linkTableMenuItem);
         return new LinksPage(this.page);
