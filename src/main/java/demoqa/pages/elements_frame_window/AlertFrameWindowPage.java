@@ -20,6 +20,16 @@ public class AlertFrameWindowPage extends BasePage {
         this.browserWindowsMenuItem = page.locator("//li[@id='item-0']//span[text()='Browser Windows']");
     }
 
+    public BrowserWindowsPage clickBrowserWindows() {
+        click(browserWindowsMenuItem);
+        return new BrowserWindowsPage(this.page);
+    }
+
+    public ModelDialogsPage clickModalDialogs() {
+        click(modalMenuItem);
+        return new ModelDialogsPage(this.page);
+    }
+
     public AlertsPage clickAlerts() {
         click(alertMenuItem);
         return new AlertsPage(this.page);
