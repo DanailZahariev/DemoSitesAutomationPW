@@ -111,4 +111,23 @@ public abstract class BasePage implements IPage {
         trigger.click();
     }
 
+    @Override
+    public void refresh() {
+        page.reload();
+    }
+
+    @Override
+    public void goBack() {
+        page.goBack();
+    }
+
+    @Override
+    public void goForward() {
+        page.goForward();
+    }
+
+    @Override
+    public void close() {
+        page.close();
+    }
 }

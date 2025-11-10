@@ -15,4 +15,12 @@ public interface IPage {
     void waitForPageLoad();
 
     boolean isPageLoaded();
+
+    void refresh();
+
+    void goBack();
+
+    void goForward();
+
+    void close();
 }
