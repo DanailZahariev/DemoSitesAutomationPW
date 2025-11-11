@@ -10,6 +10,7 @@ public class WidgetsPage extends HomePage {
     private final Locator selectMenuItem;
     private final Locator progressBarMenuItem;
     private final Locator sliderMenuItem;
+    private final Locator autoCompleteMenuItem;
 
     public WidgetsPage(Page page) {
         super(page);
@@ -17,6 +18,12 @@ public class WidgetsPage extends HomePage {
         this.selectMenuItem = page.locator("//li[@id='item-8']//span[text()='Select Menu']");
         this.progressBarMenuItem = page.locator("//li[@id='item-4']//span[text()='Progress Bar']");
         this.sliderMenuItem = page.locator("//li[@id='item-3']//span[text()='Slider']");
+        this.autoCompleteMenuItem = page.locator("//li[@id='item-1']//span[text()='Auto Complete']");
+    }
+
+    public AutoCompletePage clickAutoComplete() {
+        click(autoCompleteMenuItem);
+        return new AutoCompletePage(this.page);
     }
 
     public SliderPage clickSlider() {
