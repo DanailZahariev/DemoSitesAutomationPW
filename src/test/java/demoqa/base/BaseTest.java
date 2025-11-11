@@ -11,7 +11,7 @@ import uttilities.PlaywrightManager;
 
 public class BaseTest extends SuiteBaseTest {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(BaseTest.class);
+    protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
     protected HomePage homePage;
 
     @BeforeMethod
