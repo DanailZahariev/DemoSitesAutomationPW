@@ -13,7 +13,7 @@ public class ProductPage extends BasePage {
         this.title = page.locator(".title");
     }
 
-    public boolean isProductHeaderDisplayed() {
-        return isVisible(title);
+    public Locator getHeaderText() {
+        return this.title;
     }
 }

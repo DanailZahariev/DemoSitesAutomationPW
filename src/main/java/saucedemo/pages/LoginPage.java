@@ -38,7 +38,11 @@ public class LoginPage extends BasePage {
         return clickLoginButton();
     }
 
-    public String getErrorMessage() {
-        return getText(errorMessage);
+//    public String getErrorMessage() {
+//        return getText(errorMessage);
+//    }
+
+    public Locator getErrorMessage() {
+        return this.errorMessage;
     }
 }
