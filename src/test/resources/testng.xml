@@ -41,4 +41,35 @@
         </classes>
     </test>
 
+    <test name="Upload and Download Tests">
+        <classes>
+            <class name="demoqa.elements.UploadDownloadTests"/>
+        </classes>
+    </test>
+
+    <test name="Interactions Tests">
+        <classes>
+            <class name="demoqa.interactions.KeyboardTests"/>
+            <class name="demoqa.interactions.SliderTests"/>
+        </classes>
+    </test>
+
+    <test name="Modal Tests">
+        <classes>
+            <class name="demoqa.modals.ModalTests"/>
+        </classes>
+    </test>
+
+    <test name="iFrame Tests">
+        <classes>
+            <class name="demoqa.frames.FrameTests"/>
+        </classes>
+    </test>
+
+    <test name="Windows Tests">
+        <classes>
+            <class name="demoqa.windows.WindowsTests"/>
+        </classes>
+    </test>
+
 </suite>
