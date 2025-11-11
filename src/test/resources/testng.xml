@@ -12,6 +12,7 @@
         <classes>
             <class name="demoqa.elements.LinkTests"/>
             <class name="demoqa.elements.WebTableTests"/>
+            <class name="demoqa.elements.UploadDownloadTests"/>
         </classes>
     </test>
 
@@ -32,18 +33,13 @@
         <classes>
             <class name="demoqa.widgets.DateTests"/>
             <class name="demoqa.widgets.SelectDropDownTests"/>
+            <class name="demoqa.widgets.AutoCompleteTests"/>
         </classes>
     </test>
 
     <test name="Alerts Tests">
         <classes>
             <class name="demoqa.alerts.AlertsTests"/>
-        </classes>
-    </test>
-
-    <test name="Upload and Download Tests">
-        <classes>
-            <class name="demoqa.elements.UploadDownloadTests"/>
         </classes>
     </test>
 
