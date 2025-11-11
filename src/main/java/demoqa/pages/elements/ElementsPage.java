@@ -10,6 +10,7 @@ public class ElementsPage extends BasePage {
     private final Locator linkTableMenuItem;
     private final Locator dynamicPropertiesMenuItem;
     private final Locator textBoxMenuItem;
+    private final Locator uploadDownloadMenuItem;
 
     public ElementsPage(Page page) {
         super(page);
@@ -17,6 +18,12 @@ public class ElementsPage extends BasePage {
         this.linkTableMenuItem = page.locator("//li[@id='item-5']//span[text()='Links']");
         this.dynamicPropertiesMenuItem = page.locator("//li[@id='item-8']//span[text()='Dynamic Properties']");
         this.textBoxMenuItem = page.locator("//li[@id='item-0']//span[text()='Text Box']");
+        this.uploadDownloadMenuItem = page.locator("//li[@id='item-7']//span[text()='Upload and Download']");
+    }
+
+    public UploadDownloadPage clickUploadDownload() {
+        click(uploadDownloadMenuItem);
+        return new UploadDownloadPage(this.page);
     }
 
     public TextBoxPage clickTextBox() {
