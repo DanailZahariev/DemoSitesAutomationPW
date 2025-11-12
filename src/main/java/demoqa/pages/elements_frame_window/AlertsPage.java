@@ -29,16 +29,16 @@ public class AlertsPage extends BasePage {
         click(confirmationAlertButton);
     }
 
-    public String getConfirmationResult() {
-        return getText(confirmationResult);
+    public Locator getConfirmationResult() {
+        return this.confirmationResult;
     }
 
     public void clickPromptAlertButton() {
         click(promptAlertButton);
     }
 
-    public String getPromptAlertText() {
-        return getText(promptResult);
+    public Locator getPromptAlertText() {
+        return this.promptResult;
     }
 
     public String clickInformationAlertAndGetText() {

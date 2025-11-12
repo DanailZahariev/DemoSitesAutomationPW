@@ -13,7 +13,8 @@ public class DynamicPropertiesPage extends BasePage {
         this.visibleAfterButton = page.locator("#visibleAfter");
     }
 
-    public String getVisibleAfterText() {
-        return getText(visibleAfterButton);
+    public Locator getVisibleAfterText() {
+        return this.visibleAfterButton;
+
     }
 }

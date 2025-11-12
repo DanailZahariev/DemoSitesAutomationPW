@@ -4,6 +4,8 @@ import demoqa.base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 @Test(suiteName = "Alerts Tests")
 public class AlertsTests extends BaseTest {
 
@@ -25,9 +27,8 @@ public class AlertsTests extends BaseTest {
         var alertsPage = homePage.goToAlertFrameWindow().clickAlerts();
 
         alertsPage.clickConfirmationAlertAndAccept();
-        String actualText = alertsPage.getConfirmationResult();
 
-        Assert.assertEquals(actualText, expectedText, "\n Actual & expected alert text are not equal\n");
+        assertThat(alertsPage.getConfirmationResult()).hasText(expectedText);
     }
 
     public void testDismissConfirmationAlert() {
@@ -36,9 +37,8 @@ public class AlertsTests extends BaseTest {
         var alertsPage = homePage.goToAlertFrameWindow().clickAlerts();
 
         alertsPage.clickConfirmationAlertAndDismiss();
-        String actualText = alertsPage.getConfirmationResult();
 
-        Assert.assertEquals(actualText, expectedText, "\n Actual & expected alert text are not equal\n");
+        assertThat(alertsPage.getConfirmationResult()).hasText(expectedText);
     }
 
     public void testPromptAlert() {
@@ -49,8 +49,6 @@ public class AlertsTests extends BaseTest {
 
         alertsPage.clickPromptAlertAndEnterText(inputText);
 
-        String actualText = alertsPage.getPromptAlertText();
-
-        Assert.assertEquals(actualText, expectedText, "\n Actual & expected alert text are not equal\n");
+        assertThat(alertsPage.getPromptAlertText()).hasText(expectedText);
     }
 }

@@ -12,11 +12,11 @@ public class ProgressBarPage extends BasePage {
     public ProgressBarPage(Page page) {
         super(page);
         this.startButton = page.locator("#startStopButton");
-        this.progressValue = page.locator("//div[@id='progressBar']//div[@aria-valuenow='100']");
+        this.progressValue = page.locator("div[aria-valuenow]");
     }
 
-    public String getProgressValue() {
-        return getByAttributeValue(progressValue, "aria-valuenow");
+    public Locator getProgressValue() {
+        return this.progressValue;
     }
 
     public void clickStartButton() {
