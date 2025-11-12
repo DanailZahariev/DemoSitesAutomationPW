@@ -25,8 +25,7 @@ public class ModelDialogsPage extends BasePage {
         click(closeSmallModalButton);
     }
 
-    public String getSmallModalText() {
-        return getText(smallModalText);
+    public Locator getSmallModalTextLocator() {
+        return this.smallModalText;
     }
-
 }

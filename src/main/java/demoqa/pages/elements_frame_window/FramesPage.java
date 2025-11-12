@@ -8,8 +8,8 @@ import com.microsoft.playwright.Page;
 public class FramesPage extends BasePage {
 
     private final String iFrameBigBox = "#frame1";
-    private final String textInFrame = "#sampleHeading";
     private final String iFrameSmallBox = "#frame2";
+    private final String textInFrame = "#sampleHeading";
     private final Locator headerFramesText;
 
     public FramesPage(Page page) {
@@ -17,17 +17,19 @@ public class FramesPage extends BasePage {
         this.headerFramesText = page.locator("//div[@id='framesWrapper']//h1[text()='Frames']");
     }
 
-    public String getTextInBigFrame() {
-        FrameLocator bigFrame = page.frameLocator(iFrameBigBox);
-        return bigFrame.locator(textInFrame).textContent();
+    public Locator getTextInBigFrame() {
+       return getFrameLocator(iFrameBigBox).locator(textInFrame);
     }
 
-    public String getTextInSmallFrame() {
-        FrameLocator smallFrame = page.frameLocator(iFrameSmallBox);
-        return smallFrame.locator(textInFrame).textContent();
+    public Locator getTextInSmallFrame() {
+       return getFrameLocator(iFrameSmallBox).locator(textInFrame);
     }
 
-    public String getHeaderFramesText() {
-        return getText(headerFramesText);
+    private FrameLocator getFrameLocator(String iframe) {
+        return page.frameLocator(iframe);
+    }
+
+    public Locator getHeaderFramesText() {
+        return this.headerFramesText;
     }
 }

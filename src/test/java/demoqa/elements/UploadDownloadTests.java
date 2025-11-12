@@ -1,6 +1,7 @@
 package demoqa.elements;
 
 import com.microsoft.playwright.Download;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import demoqa.base.BaseTest;
 import org.testng.Assert;
@@ -9,6 +10,8 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 @Test(suiteName = "Upload Download Tests")
 public class UploadDownloadTests extends BaseTest {
@@ -23,10 +26,10 @@ public class UploadDownloadTests extends BaseTest {
             Files.writeString(tempFile, "Hello World");
             uploadDownloadPage.uploadFile(tempFile);
 
-            String actualResult = uploadDownloadPage.getUploadResultPath();
+            Locator actualResult = uploadDownloadPage.getUploadResultPath();
             String expectedResult = String.valueOf(tempFile.getFileName());
 
-            Assert.assertTrue(actualResult.contains(expectedResult), "File is not uploaded");
+            assertThat(actualResult).containsText(expectedResult);
         } catch (IOException e) {
            LOGGER.error("Failed to create temp file: {}", e.getMessage());
         } finally {

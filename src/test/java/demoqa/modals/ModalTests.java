@@ -1,8 +1,9 @@
 package demoqa.modals;
 
 import demoqa.base.BaseTest;
-import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 @Test(suiteName = "Modal Tests")
 public class ModalTests extends BaseTest {
@@ -14,9 +15,7 @@ public class ModalTests extends BaseTest {
         var modelDialogsPage = alertFrameWindowPage.clickModalDialogs();
         modelDialogsPage.clickSmallModalButton();
 
-        var actualText = modelDialogsPage.getSmallModalText();
-
-        Assert.assertTrue(actualText.contains(expectedText), "Text is not correct");
+        assertThat(modelDialogsPage.getSmallModalTextLocator()).containsText(expectedText);
         modelDialogsPage.clickCloseSmallModalButton();
     }
 }

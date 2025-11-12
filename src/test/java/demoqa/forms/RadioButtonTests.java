@@ -1,8 +1,9 @@
 package demoqa.forms;
 
 import demoqa.base.BaseTest;
-import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 @Test(suiteName = "Radio Button Tests")
 public class RadioButtonTests extends BaseTest {
@@ -12,8 +13,7 @@ public class RadioButtonTests extends BaseTest {
 
         formsPage.clickMusicCheckBox();
 
-        Assert.assertTrue(formsPage.isMusicCheckBoxSelected(),
-                "Female radio button is not clicked");
+        assertThat(formsPage.getMusicHobbyLocator()).isChecked();
     }
 }
 

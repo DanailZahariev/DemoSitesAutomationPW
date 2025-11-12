@@ -1,10 +1,11 @@
 package demoqa.widgets;
 
 import demoqa.base.BaseTest;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Month;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 @Test(suiteName = "Date Tests")
 public class DateTests extends BaseTest {
@@ -21,10 +22,9 @@ public class DateTests extends BaseTest {
         datePickerPage.selectMonth(month);
         datePickerPage.selectYear(year);
         datePickerPage.clickDay(day);
-        String actualDate = datePickerPage.getDate();
 
         String expectedDate = expectedMonth + "/" + day + "/" + year;
 
-        Assert.assertEquals(actualDate, expectedDate, "Date is not correct");
+        assertThat(datePickerPage.getSelectDateFieldLocator()).hasValue(expectedDate);
     }
 }

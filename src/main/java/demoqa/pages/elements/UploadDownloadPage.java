@@ -24,8 +24,8 @@ public class UploadDownloadPage extends BasePage {
         uploadButton.setInputFiles(filePath);
     }
 
-    public String getUploadResultPath() {
-        return getText(uploadResultPath);
+    public Locator getUploadResultPath() {
+        return this.uploadResultPath;
     }
 
     public void clickDownloadButton() {

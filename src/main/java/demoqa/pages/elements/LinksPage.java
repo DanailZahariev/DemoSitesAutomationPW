@@ -21,8 +21,8 @@ public class LinksPage extends BasePage {
         click(badRequestLink);
     }
 
-    public String getLinkResponse() {
-        return getText(linkResponse);
+    public Locator getLinkResponse() {
+        return this.linkResponse;
     }
 
     public Page clickHomePageLink() {

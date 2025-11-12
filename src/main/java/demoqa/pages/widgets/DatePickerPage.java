@@ -45,7 +45,8 @@ public class DatePickerPage extends BasePage {
         return getValue(selectDateField);
     }
 
-    public boolean isDayInMonth(String day) {
-        return getDayLocator(day).isVisible();
+    public Locator getSelectDateFieldLocator() {
+        return this.selectDateField;
     }
+
 }

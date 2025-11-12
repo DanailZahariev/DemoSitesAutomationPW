@@ -43,8 +43,8 @@ public class HomePage extends BasePage {
         return new WidgetsPage(this.page);
     }
 
-    public String getFormsCardText() {
-        return formsCard.textContent();
+    public Locator getFormsCard() {
+        return this.formsCard;
     }
 
 }

@@ -10,10 +10,12 @@ import java.util.List;
 public class SelectMenuPage extends BasePage {
 
     private final Locator standardMultiSelect;
+    private final Locator standardMultiSelectCheckedOptions;
 
     public SelectMenuPage(Page page) {
         super(page);
         this.standardMultiSelect = page.locator("#cars");
+        this.standardMultiSelectCheckedOptions = standardMultiSelect.locator("option:checked");
     }
 
     public void setStandardMultiSelect(String text) {
@@ -48,6 +50,10 @@ public class SelectMenuPage extends BasePage {
     }
 
     public List<String> getAllSelectedMultiOptions() {
-        return standardMultiSelect.locator("option:checked").allTextContents();
+        return standardMultiSelectCheckedOptions.allTextContents();
+    }
+
+    public Locator getCheckedOptionsLocator() {
+        return this.standardMultiSelectCheckedOptions;
     }
 }

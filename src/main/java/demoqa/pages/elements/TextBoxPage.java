@@ -36,19 +36,29 @@ public class TextBoxPage extends BasePage {
     public void setEmailField(String email) {
         fill(emailField, email);
     }
+
     public void setCurrentAddress(String address) {
         currentAddress.pressSequentially(address + "\n");
     }
 
-    public String getNameResult() {
-        return getText(nameResult);
+    public void submitUserInformation(String fullName, String email, String... currentAddress) {
+        setFullNameField(fullName);
+        setEmailField(email);
+        for (String address : currentAddress) {
+            setCurrentAddress(address);
+        }
+        clickSubmit();
     }
 
-    public String getEmailResult() {
-        return getText(emailResult);
+    public Locator getNameResult() {
+        return nameResult;
     }
 
-    public String getCurrentAddressResult() {
-        return getText(currentAddressResult);
+    public Locator getEmailResult() {
+        return emailResult;
+    }
+
+    public Locator getCurrentAddressResult() {
+        return currentAddressResult;
     }
 }

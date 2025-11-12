@@ -1,8 +1,9 @@
 package demoqa.interactions;
 
 import demoqa.base.BaseTest;
-import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 @Test(suiteName = "Slider Tests")
 public class SliderTests extends BaseTest {
@@ -11,9 +12,6 @@ public class SliderTests extends BaseTest {
         var sliderPage = homePage.goToWidgets().clickSlider();
         sliderPage.moveSlider("100");
 
-        String actual = sliderPage.getSliderValue();
-        String expected = "100";
-
-        Assert.assertEquals(actual, expected, "Slider value is not correct");
+        assertThat(sliderPage.getSliderResult()).hasAttribute("value", "100");
     }
 }

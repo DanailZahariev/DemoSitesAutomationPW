@@ -1,10 +1,12 @@
 package demoqa.elements;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import demoqa.base.BaseTest;
 import demoqa.pages.home.HomePage;
-import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 @Test(suiteName = "Link Tests")
 public class LinkTests extends BaseTest {
@@ -13,10 +15,9 @@ public class LinkTests extends BaseTest {
         var linksPage = homePage.goToElements().clickLinks();
         linksPage.clickBadRequestLink();
 
-        var actual = linksPage.getLinkResponse();
         String expected = "Link has responded with staus 400 and status text Bad Request";
 
-        Assert.assertEquals(actual, expected, "Response is not correct");
+        assertThat(linksPage.getLinkResponse()).hasText(expected);
     }
 
     public void testLinkOpenNewTab() {
@@ -25,8 +26,8 @@ public class LinkTests extends BaseTest {
         HomePage newHomePage = new HomePage(newTab);
 
         String expectedText = "Forms";
-        String actualText = newHomePage.getFormsCardText();
+        Locator actualText = newHomePage.getFormsCard();
 
-        Assert.assertEquals(actualText, expectedText, "Text is not correct");
+        assertThat(actualText).hasText(expectedText);
     }
 }
