@@ -2,6 +2,7 @@ pipeline {
 	agent {
 		docker {
 			image 'mcr.microsoft.com/playwright/java:v1.55.0-noble'
+			tool 'docker-cli'
 		}
 	}
 
