@@ -27,7 +27,7 @@ pipeline {
 
 		stage('3. Run Playwright Tests') {
 			steps {
-				sh 'mvn -Dmaven.repo.local=.m2/repository test -Dbrowser=chromium'
+				sh 'mvn -Dmaven.repo.local=.m2/repository test -Dbrowser=chromium -Dlogging.level.root=INFO'
 			}
 		}
 	}
@@ -53,6 +53,7 @@ pipeline {
 			}
 
 			archiveArtifacts artifacts: 'target/surefire-reports/*.xml', allowEmptyArchive: true
+			archiveArtifacts artifacts: 'test-results/screenshots/**/*.png', allowEmptyArchive: true
 
 			publishHTML(target: [
 				allowMissing: true,
@@ -62,6 +63,32 @@ pipeline {
 				reportFiles: 'index.html',
 				reportName: 'Playwright HTML Report'
 			])
+
+			publishHTML(target: [
+				allowMissing: true,
+				alwaysLinkToLastBuild: true,
+				keepAll: true,
+				reportDir: 'test-results/screenshots',
+				reportFiles: '*.png',
+				reportName: 'Failure Screenshots'
+			])
+
+			publishHTML(target: [
+				allowMissing: true,
+				alwaysLinkToLastBuild: true,
+				keepAll: true,
+				reportDir: 'test-output',
+				reportFiles: 'index.html',
+				reportName: 'TestNG HTML Report'
+			])
+		}
+
+		failure {
+			echo '❌ Tests FAILED! Check screenshots in Build Artifacts.'
+		}
+
+		success {
+			echo '✅ All tests PASSED!'
 		}
 	}
 }
