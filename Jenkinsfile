@@ -1,7 +1,7 @@
 pipeline {
 	agent {
 		docker {
-			image 'mcr.microsoft.com/playwright/java:v1.44.0'
+			image 'mcr.microsoft.com/playwright/java:v1.55.0-noble'
 		}
 	}
 
