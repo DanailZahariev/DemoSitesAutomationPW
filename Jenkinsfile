@@ -2,12 +2,16 @@ pipeline {
 	agent {
 		docker {
 			image 'mcr.microsoft.com/playwright/java:v1.55.0-noble'
-			args '--shm-size=1g --security-opt seccomp=unconfined --cap-add=SYS_ADMIN'
+			args '--shm-size=2g --security-opt seccomp=unconfined --cap-add=SYS_ADMIN --ipc=host'
 		}
 	}
 
-	stages {
+	environment {
+		MOZ_HEADLESS = '1'
+		DISPLAY = ':99'
+	}
 
+	stages {
 		stage('1. Show Versions (Sanity Check)') {
 			steps {
 				sh 'java --version'
@@ -23,7 +27,7 @@ pipeline {
 
 		stage('3. Run Playwright Tests') {
 			steps {
-				sh 'mvn -Dmaven.repo.local=.m2/repository test'
+				sh 'mvn -Dmaven.repo.local=.m2/repository test -Dbrowser=chromium'
 			}
 		}
 	}
