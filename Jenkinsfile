@@ -16,13 +16,13 @@ pipeline {
 
 		stage('2. Compile & Download Dependencies') {
 			steps {
-				sh 'mvn clean install -DskipTests=true'
+				sh 'mvn -Dmaven.repo.local=.m2/repository clean install -DskipTests=true'
 			}
 		}
 
 		stage('3. Run Playwright Tests') {
 			steps {
-				sh 'mvn test'
+				sh 'mvn -Dmaven.repo.local=.m2/repository test'
 			}
 		}
 	}
