@@ -4,6 +4,9 @@ import com.microsoft.playwright.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class PlaywrightManager {
 
     private static final ThreadLocal<Playwright> playwrightThreadLocal = new ThreadLocal<>();
@@ -20,7 +23,7 @@ public class PlaywrightManager {
 
         BrowserType.LaunchOptions launchOptions = new BrowserType.LaunchOptions();
         launchOptions.setHeadless(headless).
-                setTimeout(ConfigReader.getTimeout());
+                setTimeout(ConfigReader.getTimeout()).setArgs(List.of("--no-sandbox"));
 
         BrowserContext context;
 
