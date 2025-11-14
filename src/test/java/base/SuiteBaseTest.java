@@ -7,7 +7,6 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 import utilities.ConfigReader;
 import utilities.PlaywrightManager;
-import utilities.ScreenshotHelper;
 
 public class SuiteBaseTest {
 
@@ -40,19 +39,17 @@ public class SuiteBaseTest {
     @AfterMethod
     public void tearDownTest(ITestResult result) {
         String testName = result.getName();
-        Page page = PlaywrightManager.getPage();
 
-        LOGGER.info("Final URL: {}", page.url());
-        if (result.getStatus() == ITestResult.FAILURE) {
-            LOGGER.error("Test FAILED: {}", testName);
-            ScreenshotHelper.captureScreenshot(result.getName());
-        } else if (result.getStatus() == ITestResult.SUCCESS) {
-            LOGGER.info("Test PASSED: {}", testName);
-        } else if (result.getStatus() == ITestResult.SKIP) {
-            LOGGER.warn("Test SKIPPED: {}", testName);
+        try {
+            Page page = PlaywrightManager.getPage();
+            LOGGER.info("Final URL for [{}]: {}", testName, page.url());
+
+        } catch (Exception e) {
+            LOGGER.warn("Could not retrieve page for [{}]. It might have failed during setup.", testName);
         }
 
         PlaywrightManager.teardownSuite();
+
         LOGGER.info("──────────────────────────────────────────");
     }
 }
