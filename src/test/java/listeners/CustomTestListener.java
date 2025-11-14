@@ -34,7 +34,7 @@ public class CustomTestListener implements ITestListener {
             File screenshot = new File(screenshotPath);
             if (screenshot.exists()) {
                 String relativePath = screenshotPath.replace("\\", "/")
-                        .replace("target/test-output/", "");
+                        .replace("target/", "");
 
                 Reporter.log("<br><b>Screenshot:</b><br>");
                 Reporter.log("<a href='../" + relativePath + "' target='_blank'>");
