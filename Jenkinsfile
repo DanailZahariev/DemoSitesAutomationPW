@@ -1,46 +1,38 @@
 pipeline {
 	agent {
 		docker {
-			image 'mcr.microsoft.com/playwright:latest'
+			image 'mcr.microsoft.com/playwright/java:v1.44.0'
 		}
 	}
-
 	stages {
-		stage('1. Show Versions') {
+		stage('Show Versions') {
 			steps {
-				sh 'node --version'
-				sh 'npm --version'
-				sh 'npx playwright --version'
+				sh 'java --version'
+				sh 'mvn --version'
+				sh 'playwright --version'
 			}
 		}
-
-		stage('2. Install Project Dependencies') {
-			steps {
-				sh 'npm install'
-			}
-		}
-
-		stage('3. Run Playwright Tests') {
-			steps {
-				sh 'npx playwright test'
-			}
+		stage('2. Compile & Download Dependencies') {
+			sh 'mvn clean install -DskipTests=true'
 		}
 	}
-	post {
-		always {
-			stage('4. Archive & Publish Reports') {
-				steps {
-					archiveArtifacts artifacts: 'playwright-report/', allowEmptyArchive: true
-					publishHTML(target: [
-						allowMissing: true,
-						alwaysLinkToLastBuild: true,
-						keepAll: true,
-						reportDir: 'playwright-report',
-						reportFiles: 'index.html',
-						reportName: 'Playwright HTML Report'
-					])
-				}
-			}
+	stage('3. Run Playwright Tests') {
+		steps {
+			sh 'mvn test'
 		}
+	}
+}
+post {
+	always {
+		echo 'Build finished. Archiving reports...'
+		archiveArtifacts artifacts: 'target/surefire-reports/*.xml', allowEmptyArchive: true
+		publishHTML(target: [
+			allowMissing: true,
+			alwaysLinkToLastBuild: true,
+			keepAll: true,
+			reportDir: 'playwright-report',
+			reportFiles: 'index.html',
+			reportName: 'Playwright HTML Report'
+		])
 	}
 }
