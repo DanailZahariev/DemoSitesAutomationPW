@@ -1,7 +1,4 @@
 pipeline {
-	environment {
-		PATH = "/usr/local/bin:${env.PATH}"
-	}
 	agent {
 		docker {
 			image 'mcr.microsoft.com/playwright/java:v1.55.0-noble'
