@@ -1,4 +1,4 @@
-package uttilities;
+package utilities;
 
 import com.microsoft.playwright.Page;
 import org.slf4j.Logger;

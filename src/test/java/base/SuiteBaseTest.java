@@ -5,9 +5,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import uttilities.ConfigReader;
-import uttilities.PlaywrightManager;
-import uttilities.ScreenshotHelper;
+import utilities.ConfigReader;
+import utilities.PlaywrightManager;
+import utilities.ScreenshotHelper;
 
 public class SuiteBaseTest {
 

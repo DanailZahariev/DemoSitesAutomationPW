@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
 import saucedemo.pages.LoginPage;
-import uttilities.PlaywrightManager;
+import utilities.PlaywrightManager;
 
 public class BaseTest extends SuiteBaseTest {
 

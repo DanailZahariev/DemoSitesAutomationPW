@@ -6,8 +6,8 @@ import demoqa.pages.home.HomePage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
-import uttilities.ConfigReader;
-import uttilities.PlaywrightManager;
+import utilities.ConfigReader;
+import utilities.PlaywrightManager;
 
 public class BaseTest extends SuiteBaseTest {
 
