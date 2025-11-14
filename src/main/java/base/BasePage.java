@@ -3,6 +3,7 @@ package base;
 import com.microsoft.playwright.Dialog;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.MouseButton;
 import com.microsoft.playwright.options.WaitForSelectorState;
 import demoqa.interfaces.IPage;
 
@@ -50,6 +51,22 @@ public abstract class BasePage implements IPage {
 
     protected void click(Locator locator) {
         locator.click();
+    }
+
+    protected void doubleClick(Locator locator) {
+        locator.dblclick();
+    }
+
+    protected void rightClick(Locator locator) {
+        locator.click(new Locator.ClickOptions().setButton(MouseButton.RIGHT));
+    }
+
+    protected void hover(Locator locator) {
+        locator.hover();
+    }
+
+    protected void dragAndDrop(Locator locator, Locator target) {
+        locator.dragTo(target);
     }
 
     protected String getByAttributeValue(Locator locator, String attribute) {
