@@ -13,7 +13,7 @@ public class ButtonTests extends BaseTest {
         var buttonsPage = homePage.goToElements().clickButtons();
 
         buttonsPage.clickDoubleClickBtn();
-        String expectedMessage = buttonsPage.getDoubleClickMessage().textContent();
+        String expectedMessage = "You have done a double click";
 
         assertThat(buttonsPage.getDoubleClickMessage()).hasText(expectedMessage);
     }
@@ -23,7 +23,7 @@ public class ButtonTests extends BaseTest {
         var buttonsPage = homePage.goToElements().clickButtons();
 
         buttonsPage.clickRightClickBtn();
-        String expectedMessage = buttonsPage.getRightClickMessage().textContent();
+        String expectedMessage = "You have done a right click";
 
         assertThat(buttonsPage.getRightClickMessage()).hasText(expectedMessage);
     }
@@ -33,7 +33,7 @@ public class ButtonTests extends BaseTest {
         var buttonsPage = homePage.goToElements().clickButtons();
 
         buttonsPage.clickClickBtn();
-        String expectedMessage = buttonsPage.getClickMessage().textContent();
+        String expectedMessage = "You have done a dynamic click";
 
         assertThat(buttonsPage.getClickMessage()).hasText(expectedMessage);
     }
