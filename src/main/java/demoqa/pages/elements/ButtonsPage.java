@@ -15,7 +15,7 @@ public class ButtonsPage extends BasePage {
 
     public ButtonsPage(Page page) {
         super(page);
-        this.doubleClickBtn = page.locator("#doubleClickBtn");
+        this.doubleClickBtn = page.locator("#doubleClickBtn22");
         this.rightClickBtn = page.locator("#rightClickBtn");
         this.clickBtn = page.locator("//div//button[text()='Click Me']");
         this.doubleClickMessage = page.locator("#doubleClickMessage");
