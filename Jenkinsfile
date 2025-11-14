@@ -16,28 +16,30 @@ pipeline {
 
 		stage('2. Install Project Dependencies') {
 			steps {
-				sh - 'npm-install'
+				sh 'npm install'
 			}
 		}
 
 		stage('3. Run Playwright Tests') {
-			sh 'npx playwright test'
+			steps {
+				sh 'npx playwright test'
+			}
 		}
 	}
-}
-post {
-	always {
-		stage('4. Archive & Publish Reports') {
-			stages {
-				archiveArtifacts artifacts: 'playwright-report/', allowEmptyArchive: true
-				publishHTML(target: [
-					allowMissing: true,
-					alwaysLinkToLastBuild: true,
-					keepAll: true,
-					reportDir: 'playwright-report',
-					reportFiles: 'index.html',
-					reportName: 'Playwright HTML Report'
-				])
+	post {
+		always {
+			stage('4. Archive & Publish Reports') {
+				steps {
+					archiveArtifacts artifacts: 'playwright-report/', allowEmptyArchive: true
+					publishHTML(target: [
+						allowMissing: true,
+						alwaysLinkToLastBuild: true,
+						keepAll: true,
+						reportDir: 'playwright-report',
+						reportFiles: 'index.html',
+						reportName: 'Playwright HTML Report'
+					])
+				}
 			}
 		}
 	}
