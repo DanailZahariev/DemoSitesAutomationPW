@@ -10,9 +10,9 @@
 
     <!-- File output -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>test-results/logs/test-execution.log</file>
+        <file>target/test-results/logs/test-execution.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>test-results/logs/test-execution-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>target/test-results/logs/test-execution-%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -22,8 +22,8 @@
 
     <!-- Root logger -->
     <root level="DEBUG">
-        <appender-ref ref="CONSOLE" />
-        <appender-ref ref="FILE" />
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
     </root>
 
 </configuration>

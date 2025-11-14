@@ -53,22 +53,13 @@ pipeline {
 			}
 
 			archiveArtifacts artifacts: 'target/surefire-reports/*.xml', allowEmptyArchive: true
-			archiveArtifacts artifacts: 'test-results/screenshots/**/*.png', allowEmptyArchive: true
+			archiveArtifacts artifacts: 'target/test-results/screenshots/**/*.png', allowEmptyArchive: true
 
 			publishHTML(target: [
 				allowMissing: true,
 				alwaysLinkToLastBuild: true,
 				keepAll: true,
-				reportDir: 'playwright-report',
-				reportFiles: 'index.html',
-				reportName: 'Playwright HTML Report'
-			])
-
-			publishHTML(target: [
-				allowMissing: true,
-				alwaysLinkToLastBuild: true,
-				keepAll: true,
-				reportDir: 'test-results/screenshots',
+				reportDir: 'target/test-results/screenshots',
 				reportFiles: '*.png',
 				reportName: 'Failure Screenshots'
 			])
@@ -77,7 +68,7 @@ pipeline {
 				allowMissing: true,
 				alwaysLinkToLastBuild: true,
 				keepAll: true,
-				reportDir: 'test-output',
+				reportDir: 'target/test-results',
 				reportFiles: 'index.html',
 				reportName: 'TestNG HTML Report'
 			])
