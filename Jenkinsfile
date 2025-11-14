@@ -52,7 +52,7 @@ pipeline {
 				echo "========================================="
 			}
 
-			archiveArtifacts artifacts: 'target/surefire-reports/*.xml', allowEmptyArchive: true
+			archiveArtifacts artifacts: 'target/surefire-reports/screenshots/**/*.png', allowEmptyArchive: true
 			archiveArtifacts artifacts: 'target/test-output/screenshots/**/*.png', allowEmptyArchive: true
 			archiveArtifacts artifacts: 'target/test-output/emailable-report.html', allowEmptyArchive: true
 
