@@ -2,6 +2,7 @@ pipeline {
 	agent {
 		docker {
 			image 'mcr.microsoft.com/playwright/java:v1.55.0-noble'
+			args '-u 501:20 --security-opt seccomp=unconfined'
 		}
 	}
 
