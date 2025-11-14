@@ -11,7 +11,6 @@ pipeline {
 			steps {
 				sh 'java --version'
 				sh 'mvn --version'
-				sh 'playwright --version'
 			}
 		}
 
