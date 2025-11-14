@@ -13,6 +13,7 @@
             <class name="demoqa.elements.LinkTests"/>
             <class name="demoqa.elements.WebTableTests"/>
             <class name="demoqa.elements.UploadDownloadTests"/>
+            <class name="demoqa.elements.ButtonTests"/>
         </classes>
     </test>
 
@@ -47,6 +48,7 @@
         <classes>
             <class name="demoqa.interactions.KeyboardTests"/>
             <class name="demoqa.interactions.SliderTests"/>
+            <class name="demoqa.interactions.DroppableTests"/>
         </classes>
     </test>
 
