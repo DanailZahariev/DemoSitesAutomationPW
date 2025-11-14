@@ -34,11 +34,10 @@ public class CustomTestListener implements ITestListener {
             File screenshot = new File(screenshotPath);
             if (screenshot.exists()) {
                 String relativePath = screenshotPath.replace("\\", "/")
-                        .replace("target/", "");
+                        .replace("target/surefire-reports/", "");
 
-                Reporter.log("<br><b>Screenshot:</b><br>");
-                Reporter.log("<a href='../" + relativePath + "' target='_blank'>");
-                Reporter.log("<img src='../" + relativePath + "' height='400' width='600' style='border:2px solid red;'/>");
+                Reporter.log("<a href='" + relativePath + "' target='_blank'>");
+                Reporter.log("<img src='" + relativePath + "' height='400' width='600' style='border:2px solid red;'/>");
                 Reporter.log("</a><br>");
 
                 LOGGER.info("\uD83D\uDCF8 Screenshot attached: {}", screenshotPath);
