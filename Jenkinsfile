@@ -2,7 +2,8 @@ pipeline {
 	agent {
 		docker {
 			image 'mcr.microsoft.com/playwright/java:v1.55.0-noble'
-			args '--security-opt seccomp=unconfined --shm-size=1g'		}
+			args '--shm-size=1g --security-opt seccomp=unconfined --cap-add=SYS_ADMIN'
+		}
 	}
 
 	stages {
