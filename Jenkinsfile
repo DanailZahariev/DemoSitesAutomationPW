@@ -30,21 +30,18 @@ pipeline {
 
 	post {
 		always {
-			agent any
-			steps {
-				echo 'Build finished. Archiving reports...'
+			echo 'Build finished. Archiving reports...'
 
-				archiveArtifacts artifacts: 'target/surefire-reports/*.xml', allowEmptyArchive: true
+			archiveArtifacts artifacts: 'target/surefire-reports/*.xml', allowEmptyArchive: true
 
-				publishHTML(target: [
-					allowMissing: true,
-					alwaysLinkToLastBuild: true,
-					keepAll: true,
-					reportDir: 'playwright-report',
-					files: 'index.html',
-					reportName: 'Playwright HTML Report'
-				])
-			}
+			publishHTML(target: [
+				allowMissing: true,
+				alwaysLinkToLastBuild: true,
+				keepAll: true,
+				reportDir: 'playwright-report',
+				reportFiles: 'index.html',
+				reportName: 'Playwright HTML Report'
+			])
 		}
 	}
 }
