@@ -54,6 +54,7 @@ pipeline {
 
 			archiveArtifacts artifacts: 'target/surefire-reports/*.xml', allowEmptyArchive: true
 			archiveArtifacts artifacts: 'target/test-output/screenshots/**/*.png', allowEmptyArchive: true
+			archiveArtifacts artifacts: 'target/test-output/emailable-report.html', allowEmptyArchive: true
 
 			publishHTML(target: [
 				allowMissing: true,
