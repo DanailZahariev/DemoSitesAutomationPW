@@ -3,6 +3,7 @@
 
     <listeners>
         <listener class-name="listeners.CustomTestListener"/>
+        <listener class-name="org.testng.reporters.EmailableReporter2"/>
     </listeners>
 
     <test name="Sauce Demo Tests">
