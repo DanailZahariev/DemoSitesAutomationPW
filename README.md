@@ -2,15 +2,12 @@
 
 Educational project for **QA Automation with Playwright and Java**. Demonstrates Page Object Model (POM), best practices, and modern approach to UI automation testing.
 
----
-<!--
-**Jenkins Build Status Badge**
+## 🚦 Status
 
-To enable the Jenkins build status badge, your Jenkins server must be publicly accessible.
-You can then uncomment the line below and replace `YOUR_JENKINS_JOB_URL` with the URL to your Jenkins job.
-
-[![Build Status](https://img.shields.io/jenkins/s/YOUR_JENKINS_JOB_URL.svg)](YOUR_JENKINS_JOB_URL)
--->
+![Tests](https://img.shields.io/badge/tests-passing-brightgreen)
+![Java](https://img.shields.io/badge/java-17+-blue)
+![Playwright](https://img.shields.io/badge/playwright-1.55.0-purple)
+[![Java CI with Maven](https://github.com/DanailZahariev/DemoSitesAutomationPW/actions/workflows/maven.yml/badge.svg)](https://github.com/DanailZahariev/DemoSitesAutomationPW/actions/workflows/maven.yml)
 
 
 ---
@@ -315,9 +312,3 @@ MIT License - free for educational purposes
 Created for educational purposes - QA Automation with Java and Playwright
 
 ---
-
-## 🚦 Status
-
-![Tests](https://img.shields.io/badge/tests-passing-brightgreen)
-![Java](https://img.shields.io/badge/java-17+-blue)
-![Playwright](https://img.shields.io/badge/playwright-1.55.0-purple)
