@@ -1,6 +1,7 @@
 package utilities;
 
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.WaitUntilState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,6 +46,19 @@ public class PlaywrightManager {
         Browser.NewContextOptions contextOptions = new Browser.NewContextOptions()
                 .setViewportSize(ConfigReader.getViewportWidth(), ConfigReader.getViewportHeight());
         context = browser.newContext(contextOptions);
+        context.route("**/*", route -> {
+            String requestUrl = route.request().url();
+            if (requestUrl.contains("google-analytics") ||
+                    requestUrl.contains("googletagmanager") ||
+                    requestUrl.contains("doubleclick") ||
+                    requestUrl.contains("google_vignette") ||
+                    requestUrl.contains("/ads/") ||
+                    requestUrl.contains("adservice")) {
+                route.abort();
+            } else {
+                route.resume();
+            }
+        });
 
         contextThreadLocal.set(context);
 
@@ -52,7 +66,10 @@ public class PlaywrightManager {
         pageThreadLocal.set(page);
 
         LOGGER.info("Thread [{}]: Navigating to: {}", Thread.currentThread().getId(), url);
-        page.navigate(url);
+
+        page.navigate(url, new Page.NavigateOptions()
+                .setTimeout(ConfigReader.getTimeout())
+                .setWaitUntil(WaitUntilState.LOAD));
     }
 
     public static void teardownSuite() {

@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="DemoQA Test Suite" parallel="classes" thread-count="3">
+<suite name="DemoQA Test Suite" parallel="classes" thread-count="2" verbose="1">
 
     <listeners>
         <listener class-name="listeners.CustomTestListener"/>
