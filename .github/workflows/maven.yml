@@ -30,7 +30,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Install Playwright Dependencies
-        run: mvn playwright:install --e
+        run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install --with-deps"
       - name: Build with Maven
         run: mvn -B verify --file pom.xml
 
