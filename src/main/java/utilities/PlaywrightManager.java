@@ -47,14 +47,36 @@ public class PlaywrightManager {
                 .setViewportSize(ConfigReader.getViewportWidth(), ConfigReader.getViewportHeight());
         context = browser.newContext(contextOptions);
         context.route("**/*", route -> {
-            String requestUrl = route.request().url();
-            if (requestUrl.contains("google-analytics") ||
-                    requestUrl.contains("googletagmanager") ||
-                    requestUrl.contains("doubleclick") ||
-                    requestUrl.contains("google_vignette") ||
-                    requestUrl.contains("/ads/") ||
-                    requestUrl.contains("adservice")) {
+            Request request = route.request();
+            String requestUrl = request.url().toLowerCase();
+            String resourceType = request.resourceType();
+
+            if (resourceType.equals("media") ||
+                    resourceType.equals("font") ||
+                    resourceType.equals("image") && (requestUrl.contains("ads") ||
+                            requestUrl.contains("banner") ||
+                            requestUrl.contains("sponsor"))) {
                 route.abort();
+                return;
+            }
+
+            if (requestUrl.contains("doubleclick") ||
+                    requestUrl.contains("googlesyndication") ||
+                    requestUrl.contains("googleadservices") ||
+                    requestUrl.contains("google-analytics") ||
+                    requestUrl.contains("googletagmanager") ||
+                    requestUrl.contains("googletagservices") ||
+                    requestUrl.contains("adservice") ||
+                    requestUrl.contains("/ads/") ||
+                    requestUrl.contains("/ad/") ||
+                    requestUrl.contains("_ads") ||
+                    requestUrl.contains("analytics") ||
+                    requestUrl.contains("tracking") ||
+                    requestUrl.contains("pagead") ||
+                    requestUrl.contains("adserver") ||
+                    requestUrl.contains("advertisement")) {
+                route.abort();
+                LOGGER.debug("Blocked ad request: {}", requestUrl);
             } else {
                 route.resume();
             }
