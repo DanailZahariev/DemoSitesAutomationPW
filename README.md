@@ -85,16 +85,6 @@ screenshot.onFailure=true
 mvn test
 ```
 
-### Specific test class
-```bash
-mvn test -Dtest=LinksTest
-```
-
-### Specific test method
-```bash
-mvn test -Dtest=LinksTest#testBadRequestLink
-```
-
 ### With different browser
 ```bash
 mvn test -Dbrowser=firefox
