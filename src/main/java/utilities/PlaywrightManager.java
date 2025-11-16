@@ -50,15 +50,6 @@ public class PlaywrightManager {
             String requestUrl = request.url().toLowerCase();
             String resourceType = request.resourceType();
 
-            if (resourceType.equals("media") ||
-                    resourceType.equals("font") ||
-                    resourceType.equals("image") && (requestUrl.contains("ads") ||
-                            requestUrl.contains("banner") ||
-                            requestUrl.contains("sponsor"))) {
-                route.abort();
-                return;
-            }
-
             if (requestUrl.contains("doubleclick") ||
                     requestUrl.contains("googlesyndication") ||
                     requestUrl.contains("googleadservices") ||
@@ -75,11 +66,20 @@ public class PlaywrightManager {
                     requestUrl.contains("adserver") ||
                     requestUrl.contains("advertisement")) {
                 route.abort();
-                LOGGER.debug("Blocked ad request: {}", requestUrl);
+                LOGGER.debug("Blocked ad/tracking request: {}", requestUrl);
+
+            } else if (resourceType.equals("image") &&
+                    (requestUrl.contains("ads") ||
+                            requestUrl.contains("banner") ||
+                            requestUrl.contains("sponsor"))) {
+                route.abort();
+                LOGGER.debug("Blocked ad image: {}", requestUrl);
             } else {
                 route.resume();
             }
         });
+
+
 
         contextThreadLocal.set(context);
 
