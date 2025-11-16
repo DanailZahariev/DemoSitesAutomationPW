@@ -29,14 +29,18 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
+      - name: Set Playwright Install Path
+        run: echo "PW_CACHE_PATH=$HOME/.cache/ms-playwright" >> $GITHUB_ENV
       - name: Cache Playwright Browsers
         uses: actions/cache@v4
         with:
+          path: ${{ env.PW_CACHE_PATH }}
           key: playwright-browsers-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
-          path: '~/.cache/ms-playwright'
           restore-keys: |
             playwright-browsers-${{ runner.os }}-
       - name: Install Playwright Dependencies
         run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install --with-deps"
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: ${{ env.PW_CACHE_PATH }}
       - name: Build with Maven
         run: mvn -B verify --file pom.xml
