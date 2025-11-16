@@ -29,6 +29,13 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
+      - name: Cache Playwright Browsers
+        uses: actions/cache@v4
+        with:
+          key: playwright-browsers-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+          path: '~/.cache/ms-playwright'
+          restore-keys: |
+            playwright-browsers-${{ runner.os }}-
       - name: Install Playwright Dependencies
         run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install --with-deps"
       - name: Build with Maven
