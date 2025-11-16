@@ -50,11 +50,9 @@ public class PlaywrightManager {
             String requestUrl = request.url().toLowerCase();
             String resourceType = request.resourceType();
 
-            if (resourceType.equals("media") ||
-                    resourceType.equals("font") ||
-                    resourceType.equals("image") && (requestUrl.contains("ads") ||
-                            requestUrl.contains("banner") ||
-                            requestUrl.contains("sponsor"))) {
+            if (resourceType.equals("image") && (requestUrl.contains("ads") ||
+                    requestUrl.contains("banner") ||
+                    requestUrl.contains("sponsor"))) {
                 route.abort();
                 return;
             }
