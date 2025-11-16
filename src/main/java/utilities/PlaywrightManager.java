@@ -25,8 +25,7 @@ public class PlaywrightManager {
         launchOptions.setHeadless(headless).
                 setTimeout(ConfigReader.getTimeout()).setArgs(List.of("--no-sandbox",
                         "--disable-setuid-sandbox",
-                        "--disable-dev-shm-usage",
-                        "--disable-gpu"));
+                        "--disable-dev-shm-usage"));
 
         BrowserContext context;
 
