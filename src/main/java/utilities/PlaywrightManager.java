@@ -22,10 +22,7 @@ public class PlaywrightManager {
 
         BrowserType.LaunchOptions launchOptions = new BrowserType.LaunchOptions();
         launchOptions.setHeadless(headless).
-                setTimeout(ConfigReader.getTimeout()).setArgs(List.of("--no-sandbox",
-                        "--disable-setuid-sandbox",
-                        "--disable-dev-shm-usage",
-                        "--disable-gpu"));
+                setTimeout(ConfigReader.getTimeout());
 
         BrowserContext context;
 
