@@ -1,6 +1,7 @@
 package utilities;
 
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.WaitUntilState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,6 +43,41 @@ public class PlaywrightManager {
         Browser.NewContextOptions contextOptions = new Browser.NewContextOptions()
                 .setViewportSize(ConfigReader.getViewportWidth(), ConfigReader.getViewportHeight());
         context = browser.newContext(contextOptions);
+        context.route("**/*", route -> {
+            Request request = route.request();
+            String requestUrl = request.url().toLowerCase();
+            String resourceType = request.resourceType();
+
+            if (resourceType.equals("media") ||
+                    resourceType.equals("font") ||
+                    resourceType.equals("image") && (requestUrl.contains("ads") ||
+                            requestUrl.contains("banner") ||
+                            requestUrl.contains("sponsor"))) {
+                route.abort();
+                return;
+            }
+
+            if (requestUrl.contains("doubleclick") ||
+                    requestUrl.contains("googlesyndication") ||
+                    requestUrl.contains("googleadservices") ||
+                    requestUrl.contains("google-analytics") ||
+                    requestUrl.contains("googletagmanager") ||
+                    requestUrl.contains("googletagservices") ||
+                    requestUrl.contains("adservice") ||
+                    requestUrl.contains("/ads/") ||
+                    requestUrl.contains("/ad/") ||
+                    requestUrl.contains("_ads") ||
+                    requestUrl.contains("analytics") ||
+                    requestUrl.contains("tracking") ||
+                    requestUrl.contains("pagead") ||
+                    requestUrl.contains("adserver") ||
+                    requestUrl.contains("advertisement")) {
+                route.abort();
+                LOGGER.debug("Blocked ad request: {}", requestUrl);
+            } else {
+                route.resume();
+            }
+        });
 
         contextThreadLocal.set(context);
 
@@ -49,7 +85,10 @@ public class PlaywrightManager {
         pageThreadLocal.set(page);
 
         LOGGER.info("Thread [{}]: Navigating to: {}", Thread.currentThread().getId(), url);
-        page.navigate(url);
+
+        page.navigate(url, new Page.NavigateOptions()
+                .setTimeout(ConfigReader.getTimeout())
+                .setWaitUntil(WaitUntilState.LOAD));
     }
 
     public static void teardownSuite() {

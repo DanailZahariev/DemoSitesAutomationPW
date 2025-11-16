@@ -10,9 +10,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "pipeline-dev" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "pipeline-dev" ]
   schedule:
     - cron: '0 8 * * 1-5'
 
