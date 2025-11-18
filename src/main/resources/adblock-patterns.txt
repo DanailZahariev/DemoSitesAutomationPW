@@ -7,13 +7,9 @@ googletagservices
 adservice
 /ads/
 /ad/
-_ads
+ads
 analytics
 tracking
 pagead
 adserver
 advertisement
-taboola
-outbrain
-criteo
-facebook.net/tr
