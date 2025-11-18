@@ -2,9 +2,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "api-test" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "api-test" ]
   schedule:
     - cron: '0 8 * * 1-5'
 

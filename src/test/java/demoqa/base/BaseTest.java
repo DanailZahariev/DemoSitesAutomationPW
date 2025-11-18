@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
 import utilities.ConfigReader;
-import utilities.PlaywrightManager;
+import utilities.managers.ResourceManager;
 
 public class BaseTest extends SuiteBaseTest {
 
@@ -20,9 +20,8 @@ public class BaseTest extends SuiteBaseTest {
         LOGGER.info("Starting test");
 
         String baseUrl = ConfigReader.getBaseUrl();
-        PlaywrightManager.setUpSuite(finalBrowser, finalHeadless, baseUrl);
-        Page page = PlaywrightManager.getPage();
-        page.waitForLoadState();
+        ResourceManager.setUpBrowserAndNavigate(finalBrowser, finalHeadless, baseUrl);
+        Page page = ResourceManager.getPage();
 
         LOGGER.info("Page loaded successfully");
         LOGGER.info("Current URL: {}", page.url());

@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
 import saucedemo.pages.LoginPage;
-import utilities.PlaywrightManager;
+import utilities.managers.ResourceManager;
 
 public class BaseTest extends SuiteBaseTest {
 
@@ -19,9 +19,8 @@ public class BaseTest extends SuiteBaseTest {
         LOGGER.info("──────────────────────────────────────────");
         LOGGER.info("Starting test");
 
-        PlaywrightManager.setUpSuite(finalBrowser, finalHeadless, url);
-        Page page = PlaywrightManager.getPage();
-        page.waitForLoadState();
+        ResourceManager.setUpBrowserAndNavigate(finalBrowser, finalHeadless, url);
+        Page page = ResourceManager.getPage();
 
         LOGGER.info("Page loaded successfully");
         LOGGER.info("Current URL: {}", page.url());
