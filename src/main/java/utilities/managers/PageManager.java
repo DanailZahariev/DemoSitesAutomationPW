@@ -15,7 +15,7 @@ public class PageManager {
     private PageManager() {
     }
 
-    public static Page createPage() {
+    public static void createPage() {
         BrowserContext context = BrowserManager.getContext();
         if (context == null) {
             throw new IllegalStateException("Browser context not initialized. Call launchBrowser() first.");
@@ -25,7 +25,6 @@ public class PageManager {
         pageThreadLocal.set(page);
         LOGGER.debug("Thread [{}]: Page created.", Thread.currentThread().getId());
 
-        return page;
     }
 
     public static void navigateTo(String url, WaitUntilState waitUntilState) {
