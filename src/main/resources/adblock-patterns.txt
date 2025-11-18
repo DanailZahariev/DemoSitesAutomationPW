@@ -13,3 +13,7 @@ tracking
 pagead
 adserver
 advertisement
+image
+ads
+sponsor
+banner

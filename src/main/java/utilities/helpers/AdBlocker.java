@@ -32,9 +32,14 @@ public class AdBlocker {
 
     public static void blockAdsAndTracking(BrowserContext context) {
         context.route("**/*", route -> {
-            if (AD_PATTERNS.stream().anyMatch(route.request().url()::contains)) {
+            Request request = route.request();
+            String requestUrl = request.url().toLowerCase();
+            String resourceType = request.resourceType();
+            if (AD_PATTERNS.stream().anyMatch(requestUrl::contains)) {
                 route.abort();
                 LOGGER.info("Blocked ad request: {}", route.request().url());
+            } else if (AD_PATTERNS.stream().anyMatch(resourceType::contains)) {
+                route.abort();
             } else {
                 route.resume();
             }
