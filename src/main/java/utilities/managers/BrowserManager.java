@@ -53,7 +53,7 @@ public class BrowserManager {
 
         BrowserContext context = browser.newContext(contextOptions);
 
-        AdBlocker.blockAdsAndTracking(context);
+//        AdBlocker.blockAdsAndTracking(context);
 
         contextThreadLocal.set(context);
         LOGGER.debug("Thread [{}]: Browser context created.", Thread.currentThread().getId());
