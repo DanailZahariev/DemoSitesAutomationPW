@@ -24,6 +24,7 @@ public class ResourceManager {
     public static void closeBrowser() {
         PageManager.closePage();
         BrowserManager.closeAll();
+        PlaywrightEngineManager.closePlaywright();
         LOGGER.info("Thread [{}]: All browser resources closed.", Thread.currentThread().getId());
     }
 

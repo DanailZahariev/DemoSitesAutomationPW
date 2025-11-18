@@ -20,13 +20,15 @@ public class AdBlocker {
     }
 
     private static List<String> loadAdPatterns() {
-        try {
-            return Files.readAllLines(
-                    Paths.get("src/main/resources/adblock-patterns.txt")
-            );
+        try (var inputStream = AdBlocker.class.getClassLoader().getResourceAsStream("adblock-patterns.txt")) {
+            if (inputStream == null) {
+                LOGGER.warn("Ad patterns file not found!");
+                return List.of();
+            }
+            return new String(inputStream.readAllBytes()).lines().toList();
         } catch (IOException e) {
-            LOGGER.warn("Could not load ad patterns, using defaults");
-            return List.of("");
+            LOGGER.warn("Could not load ad patterns, using defaults", e);
+            return List.of();
         }
     }
 
