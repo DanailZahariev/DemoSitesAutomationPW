@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import utilities.ConfigReader;
-import utilities.PlaywrightManager;
+import utilities.managers.ResourceManager;
 
 public class SuiteBaseTest {
 
@@ -41,14 +41,14 @@ public class SuiteBaseTest {
         String testName = result.getName();
 
         try {
-            Page page = PlaywrightManager.getPage();
+            Page page = ResourceManager.getPage();
             LOGGER.info("Final URL for [{}]: {}", testName, page.url());
 
         } catch (Exception e) {
             LOGGER.warn("Could not retrieve page for [{}]. It might have failed during setup.", testName);
         }
 
-        PlaywrightManager.teardownSuite();
+        ResourceManager.closeBrowser();
 
         LOGGER.info("──────────────────────────────────────────");
     }

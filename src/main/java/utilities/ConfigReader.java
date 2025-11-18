@@ -55,4 +55,8 @@ public class ConfigReader {
     public static String getScreenshotDir() {
         return getProperty("screenshot.dir");
     }
+
+    public static double getSlowMo() {
+        return Double.parseDouble(getProperty("slow-motion"));
+    }
 }

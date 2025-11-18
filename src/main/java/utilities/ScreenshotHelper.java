@@ -3,6 +3,7 @@ package utilities;
 import com.microsoft.playwright.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import utilities.managers.ResourceManager;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -20,7 +21,7 @@ public class ScreenshotHelper {
             return null;
         }
 
-        Page page = PlaywrightManager.getPage();
+        Page page = ResourceManager.getPage();
 
         if (page == null) {
             LOGGER.error("Cannot capture screenshot: Page is null");
