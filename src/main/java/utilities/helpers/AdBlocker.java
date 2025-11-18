@@ -13,7 +13,6 @@ public class AdBlocker {
     private static final Logger LOGGER = LoggerFactory.getLogger(AdBlocker.class);
 
     private static final List<String> BLOCKED_DOMAINS = Arrays.asList(
-            "doubleclick",
             "googlesyndication",
             "googleadservices",
             "google-analytics",
