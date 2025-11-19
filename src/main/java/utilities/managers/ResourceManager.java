@@ -16,7 +16,7 @@ public class ResourceManager {
     public static void setUpBrowserAndNavigate(String browserType, boolean headless, String url) {
         BrowserManager.launchBrowser(browserType, headless);
         BrowserManager.createContext();
-        Page page = PageManager.createPage();
+        PageManager.createPage();
         PageManager.navigateTo(url, WaitUntilState.LOAD);
 
     }
@@ -24,6 +24,7 @@ public class ResourceManager {
     public static void closeBrowser() {
         PageManager.closePage();
         BrowserManager.closeAll();
+        PlaywrightEngineManager.closePlaywright();
         LOGGER.info("Thread [{}]: All browser resources closed.", Thread.currentThread().getId());
     }
 
