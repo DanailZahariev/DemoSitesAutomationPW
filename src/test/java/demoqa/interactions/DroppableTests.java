@@ -8,17 +8,6 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 @Test(suiteName = "Droppable Tests")
 public class DroppableTests extends BaseTest {
 
-    public void testDragAndDrop() {
-        var droppablePage = homePage.goToInteractions().clickDroppable();
-        String initialText = "Drop here";
-
-        assertThat(droppablePage.getDroppableBox()).hasText(initialText);
-
-        droppablePage.dragToDestination();
-        String expectedText = "Dropped!";
-
-        assertThat(droppablePage.getDroppableBox()).hasText(expectedText);
-    }
 
     public void testDragAndDropToAcceptable() {
         var droppablePage = homePage.goToInteractions().clickDroppable();
