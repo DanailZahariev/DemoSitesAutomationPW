@@ -19,11 +19,11 @@ public class HomePage extends BasePage {
 
     public HomePage(Page page) {
         super(page);
-        this.formsCard = page.locator("//div[@id='app']//h5[text()='Forms']");
-        this.elementsCard = page.locator("//div[@id='app']//h5[text()='Elements']");
-        this.widgetMenuCard = page.locator("//div[@id='app']//h5[text()='Widgets']");
-        this.alertFrameWindowMenuCard = page.locator("//div[@id='app']//h5[contains(text(),'Alerts')]");
-        this.interactionsMenuCard = page.locator("//div[@id='app']//h5[text()='Interactions']");
+        this.formsCard = page.locator("//h5[text()='Forms']");
+        this.elementsCard = page.locator("//h5[text()='Elements']");
+        this.widgetMenuCard = page.locator("//h5[text()='Widgets']");
+        this.alertFrameWindowMenuCard = page.locator("//h5[contains(text(),'Alerts')]");
+        this.interactionsMenuCard = page.locator("//h5[text()='Interactions']");
     }
 
     public InteractionsPage goToInteractions() {

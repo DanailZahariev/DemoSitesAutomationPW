@@ -14,10 +14,10 @@ public class AlertFrameWindowPage extends BasePage {
 
     public AlertFrameWindowPage(Page page) {
         super(page);
-        this.modalMenuItem = page.locator("//li[@id='item-4']//span[contains(text(),'Modal')]");
-        this.alertMenuItem = page.locator("//li[@id='item-1']//span[text()='Alerts']");
-        this.framesMenuItem = page.locator("//li[@id='item-2']/span[text()='Frames']");
-        this.browserWindowsMenuItem = page.locator("//li[@id='item-0']//span[text()='Browser Windows']");
+        this.modalMenuItem = page.locator("//span[contains(text(),'Modal')]");
+        this.alertMenuItem = page.locator("//span[text()='Alerts']");
+        this.framesMenuItem = page.locator("//span[text()='Frames']");
+        this.browserWindowsMenuItem = page.locator("//span[text()='Browser Windows']");
     }
 
     public BrowserWindowsPage clickBrowserWindows() {

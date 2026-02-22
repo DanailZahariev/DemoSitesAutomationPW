@@ -20,8 +20,7 @@ public class DroppableTests extends BaseTest {
         droppablePage.dragToAcceptable();
 
         String expectedText = "Dropped!";
-
-        assertThat(droppablePage.getAcceptableBox()).hasText(expectedText);
+        assertThat(droppablePage.getDroppableBox()).hasText(expectedText);
     }
 
     public void testDragAndDropNotAcceptable() {

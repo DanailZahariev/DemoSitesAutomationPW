@@ -2,7 +2,9 @@ package base;
 
 import com.microsoft.playwright.Dialog;
 import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Mouse;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.BoundingBox;
 import com.microsoft.playwright.options.MouseButton;
 import com.microsoft.playwright.options.WaitForSelectorState;
 import demoqa.interfaces.IPage;
@@ -65,8 +67,20 @@ public abstract class BasePage implements IPage {
         locator.hover();
     }
 
-    protected void dragAndDrop(Locator locator, Locator target) {
-        locator.dragTo(target);
+    protected void dragAndDrop(Locator source, Locator target) {
+        BoundingBox sourceBounds = source.boundingBox();
+        BoundingBox targetBounds = target.boundingBox();
+
+        double sourceX = sourceBounds.x + sourceBounds.width / 2;
+        double sourceY = sourceBounds.y + sourceBounds.height / 2;
+        double targetX = targetBounds.x + targetBounds.width / 2;
+        double targetY = targetBounds.y + targetBounds.height / 2;
+
+        page.mouse().move(sourceX, sourceY);
+        page.mouse().down();
+        // Движим се стъпково към target-а
+        page.mouse().move(targetX, targetY, new Mouse.MoveOptions().setSteps(10));
+        page.mouse().up();
     }
 
     protected String getByAttributeValue(Locator locator, String attribute) {
@@ -82,8 +96,11 @@ public abstract class BasePage implements IPage {
     }
 
     protected void waitForVisible(Locator locator) {
-        locator.waitFor(new Locator.WaitForOptions()
-                .setState(WaitForSelectorState.VISIBLE));
+        waitFor(locator);
+    }
+
+    protected void waitFor(Locator locator) {
+        locator.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
     }
 
     protected boolean isVisible(Locator locator) {

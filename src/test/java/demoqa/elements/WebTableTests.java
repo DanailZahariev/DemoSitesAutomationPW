@@ -42,13 +42,13 @@ public class WebTableTests extends BaseTest {
         var firstName = "Ivan";
         var lastName = "Ivanov";
         var email = "ivan@example.com";
-        var age = 20;
-        var salary = 5000;
+        var age = "20";
+        var salary = "5000";
         var department = "QA";
         int expectedRows = 4;
 
         var webTablePage = homePage.goToElements().clickWebTables();
-        webTablePage.addNewUser(firstName, lastName, email, String.valueOf(age), String.valueOf(salary), department);
+        webTablePage.addNewUser(firstName, lastName, email, age, salary, department);
 
         int dataRowCount = webTablePage.getDataRows();
 
@@ -61,8 +61,8 @@ public class WebTableTests extends BaseTest {
         String actualSalary = webTablePage.getRowSalary(email);
         String actualDepartment = webTablePage.getRowDepartment(email);
 
-        Assert.assertEquals(String.valueOf(age), actualAge);
-        Assert.assertEquals(String.valueOf(salary), actualSalary);
+        Assert.assertEquals(actualAge, age);
+        Assert.assertEquals(actualSalary, salary);
         Assert.assertEquals(actualFirstName, firstName);
         Assert.assertEquals(actualLastName, lastName);
         Assert.assertEquals(actualEmail, email);

@@ -3,31 +3,31 @@ package demoqa.pages.elements;
 import base.BasePage;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 
 public class WebTablesPage extends BasePage {
 
-    private final Locator ageField;
     private final Locator submitButton;
-    private final Locator dataRows;
-    private final Locator addRow;
+    private final Locator addRowButton;
     private final Locator firstNameField;
     private final Locator lastNameField;
     private final Locator emailField;
+    private final Locator ageField;
     private final Locator salaryField;
     private final Locator departmentField;
-
+    private final Locator allFieldRows;
 
     public WebTablesPage(Page page) {
         super(page);
-        this.ageField = page.locator("#age");
         this.submitButton = page.locator("#submit");
-        this.dataRows = page.locator(".rt-tbody .rt-tr-group .rt-tr:not(.-padRow)");
-        this.addRow = page.locator("#addNewRecordButton");
-        this.firstNameField = page.locator("#firstName");
-        this.lastNameField = page.locator("#lastName");
-        this.emailField = page.locator("#userEmail");
-        this.salaryField = page.locator("#salary");
-        this.departmentField = page.locator("#department");
+        this.addRowButton = page.locator("#addNewRecordButton");
+        this.firstNameField = page.getByPlaceholder("First Name");
+        this.lastNameField = page.getByPlaceholder("Last Name");
+        this.emailField = page.getByPlaceholder("name@example.com");
+        this.ageField = page.getByPlaceholder("Age");
+        this.salaryField = page.getByPlaceholder("Salary");
+        this.departmentField = page.getByPlaceholder("Department");
+        this.allFieldRows = page.locator("tbody tr");
     }
 
     public void setFirstNameField(String firstName) {
@@ -50,65 +50,61 @@ public class WebTablesPage extends BasePage {
         fill(departmentField, department);
     }
 
+    public void setAge(String age) {
+        fill(ageField, age);
+    }
+
     public void clickEdit(String email) {
         Locator row = getRowByUniqueText(email);
-        Locator editBtn = row.locator("//span[@title='Edit']");
+        Locator editBtn = row.getByTitle("Edit");
         click(editBtn);
     }
 
     public void deleteRow(String text) {
         Locator row = getRowByUniqueText(text);
-        Locator deleteBtn = row.locator("//span[@title='Delete']");
+        Locator deleteBtn = row.getByTitle("Delete");
         click(deleteBtn);
     }
 
-    public void setAge(String age) {
-        fill(ageField, age);
-    }
-
     public String getRowFirstName(String text) {
-        Locator row = getRowByUniqueText(text);
-        Locator firstNameCell = row.locator(" .rt-td").nth(0);
-        return getText(firstNameCell);
+        return getCellText(text, 0);
     }
 
     public String getRowLastName(String text) {
-        Locator row = getRowByUniqueText(text);
-        Locator lastNameCell = row.locator(" .rt-td").nth(1);
-        return getText(lastNameCell);
+        return getCellText(text, 1);
     }
 
     public String getRowAge(String text) {
-        Locator row = getRowByUniqueText(text);
-        Locator ageCell = row.locator(" .rt-td").nth(2);
-        return getText(ageCell);
+        return getCellText(text, 2);
     }
 
     public String getRowEmail(String text) {
-        Locator row = getRowByUniqueText(text);
-        Locator emailCell = row.locator(" .rt-td").nth(3);
-        return getText(emailCell);
+        return getCellText(text, 3);
     }
 
     public String getRowSalary(String text) {
-        Locator row = getRowByUniqueText(text);
-        Locator salaryCell = row.locator(" .rt-td").nth(4);
-        return getText(salaryCell);
+        return getCellText(text, 4);
     }
 
     public String getRowDepartment(String text) {
-        Locator row = getRowByUniqueText(text);
-        Locator departmentCell = row.locator(" .rt-td").nth(5);
-        return getText(departmentCell);
+        return getCellText(text, 5);
     }
 
     public int getDataRows() {
-        return dataRows.count();
+        waitForVisible(allFieldRows.first());
+        return allFieldRows.count();
     }
 
     private Locator getRowByUniqueText(String uniqueText) {
-        return this.page.locator(".rt-tr-group")
+        return page.getByRole(AriaRole.ROW)
                 .filter(new Locator.FilterOptions().setHasText(uniqueText));
+    }
+
+    private String getCellText(String uniqueText, int columnIndex) {
+        Locator cell = getRowByUniqueText(uniqueText)
+                .getByRole(AriaRole.CELL)
+                .nth(columnIndex);
+        return getText(cell);
     }
 
     public void addNewUser(String firstName, String lastName, String email, String age, String salary, String department) {
@@ -123,7 +119,7 @@ public class WebTablesPage extends BasePage {
     }
 
     public void clickAddNewRow() {
-        click(addRow);
+        click(addRowButton);
     }
 
     public void clickSubmit() {

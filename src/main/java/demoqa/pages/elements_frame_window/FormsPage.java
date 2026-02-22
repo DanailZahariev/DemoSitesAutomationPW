@@ -11,7 +11,7 @@ public class FormsPage extends BasePage {
 
     public FormsPage(Page page) {
         super(page);
-        this.practiceFormMenuItem = page.locator("//li[@id='item-0']/span[text()='Practice Form']");;
+        this.practiceFormMenuItem = page.locator("//span[text()='Practice Form']");;
     }
 
     public PracticeFormPage clickPracticeForm() {

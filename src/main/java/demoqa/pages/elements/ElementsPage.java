@@ -15,12 +15,12 @@ public class ElementsPage extends BasePage {
 
     public ElementsPage(Page page) {
         super(page);
-        this.webTableMenuItem = page.locator("//li[@id='item-3']//span[text()='Web Tables']");
-        this.linkTableMenuItem = page.locator("//li[@id='item-5']//span[text()='Links']");
-        this.dynamicPropertiesMenuItem = page.locator("//li[@id='item-8']//span[text()='Dynamic Properties']");
-        this.textBoxMenuItem = page.locator("//li[@id='item-0']//span[text()='Text Box']");
-        this.uploadDownloadMenuItem = page.locator("//li[@id='item-7']//span[text()='Upload and Download']");
-        this.buttonsMenuItem = page.locator("//li[@id='item-4']//span[text()='Buttons']");
+        this.webTableMenuItem = page.locator("//span[text()='Web Tables']");
+        this.linkTableMenuItem = page.locator("//span[text()='Links']");
+        this.dynamicPropertiesMenuItem = page.locator("//span[text()='Dynamic Properties']");
+        this.textBoxMenuItem = page.locator("//span[text()='Text Box']");
+        this.uploadDownloadMenuItem = page.locator("//span[text()='Upload and Download']");
+        this.buttonsMenuItem = page.locator("//span[text()='Buttons']");
     }
 
     public ButtonsPage clickButtons() {

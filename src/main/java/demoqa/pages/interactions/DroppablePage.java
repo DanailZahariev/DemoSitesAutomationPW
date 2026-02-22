@@ -3,48 +3,37 @@ package demoqa.pages.interactions;
 import base.BasePage;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.WaitForSelectorState;
 
 public class DroppablePage extends BasePage {
 
-    private final Locator draggableElement;
     private final Locator droppableBox;
     private final Locator acceptTab;
     private final Locator acceptableBox;
     private final Locator notAcceptableBox;
-    private final Locator acceptableDroppableBox;
 
     public DroppablePage(Page page) {
         super(page);
-        this.draggableElement = page.locator("#draggable");
-        this.droppableBox = page.locator("div[id='simpleDropContainer'] p");
         this.acceptTab = page.locator("#droppableExample-tab-accept");
+        this.droppableBox = page.locator("#droppableExample-tabpane-accept .drop-box");
         this.acceptableBox = page.locator("#acceptable");
-        this.acceptableDroppableBox = page.locator("//div[@id='acceptDropContainer']//div[@id='droppable']//p");
-        this.notAcceptableBox = page.locator("#notAcceptable");
+        this.notAcceptableBox = page.getByText("Not Acceptable", new Page.GetByTextOptions().setExact(true));
     }
 
     public void dragToNotAcceptable() {
-        dragAndDrop(notAcceptableBox, acceptableDroppableBox);
+        dragAndDrop(notAcceptableBox, droppableBox);
     }
-
 
     public void dragToAcceptable() {
-        dragAndDrop(acceptableBox, acceptableDroppableBox);
-    }
-
-    public void dragToDestination() {
-        dragAndDrop(draggableElement, droppableBox);
+        dragAndDrop(acceptableBox, droppableBox);
     }
 
     public Locator getDroppableBox() {
         return this.droppableBox;
     }
 
-    public Locator getAcceptableBox() {
-        return this.acceptableDroppableBox;
-    }
-
     public void clickAcceptTab() {
         click(acceptTab);
+        waitForVisible(page.locator("#acceptable.ui-draggable-handle"));
     }
 }
